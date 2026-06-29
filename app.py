@@ -288,11 +288,16 @@ def get_embeddings():
     )
 
 def get_llm():
-    """Get LLM using Groq"""
+    """Get LLM using Groq - works both locally and on Streamlit Cloud"""
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        api_key = os.getenv("GROQ_API_KEY")
+    
     return ChatGroq(
         model="llama-3.1-8b-instant",
         temperature=0.7,
-        api_key=os.getenv("GROQ_API_KEY")
+        api_key=api_key
     )
 
 # ============= SIDEBAR =============
