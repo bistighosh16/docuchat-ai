@@ -16,6 +16,12 @@
 
 ---
 
+<div align="center">
+
+### 🌐 [**🚀 TRY LIVE DEMO**](https://docuchat-ai-vivi.streamlit.app/)
+
+</div>
+
 ## 🌟 Features
 
 - 🎨 **Stunning UI** - Modern glassmorphism design with smooth animations
