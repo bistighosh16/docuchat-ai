@@ -16,10 +16,7 @@ load_dotenv()
 # Detect environment - use Groq if API key exists, else Ollama
 USE_GROQ = os.getenv("GROQ_API_KEY") is not None
 
-if USE_GROQ:
-    from langchain_groq import ChatGroq
-else:
-    from langchain_ollama import OllamaLLM
+from langchain_groq import ChatGroq
 
 # ============= PAGE CONFIG =============
 st.set_page_config(
@@ -285,15 +282,12 @@ def get_embeddings():
     )
 
 def get_llm():
-    """Get LLM - Groq for cloud, Ollama for local"""
-    if USE_GROQ:
-        return ChatGroq(
-            model="llama-3.1-8b-instant",
-            temperature=0.7,
-            api_key=os.getenv("GROQ_API_KEY")
-        )
-    else:
-        return OllamaLLM(model="llama3.2")
+    """Get LLM using Groq"""
+    return ChatGroq(
+        model="llama-3.1-8b-instant",
+        temperature=0.7,
+        api_key=os.getenv("GROQ_API_KEY")
+    )
 
 # ============= SIDEBAR =============
 with st.sidebar:
