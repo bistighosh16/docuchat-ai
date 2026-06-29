@@ -13,8 +13,14 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Detect environment - use Groq if API key exists, else Ollama
-USE_GROQ = os.getenv("GROQ_API_KEY") is not None
+# Check for API key in either Streamlit secrets or env vars
+def has_groq_key():
+    try:
+        return st.secrets.get("GROQ_API_KEY") is not None
+    except (KeyError, FileNotFoundError):
+        return os.getenv("GROQ_API_KEY") is not None
+
+USE_GROQ = has_groq_key()
 
 from langchain_groq import ChatGroq
 
